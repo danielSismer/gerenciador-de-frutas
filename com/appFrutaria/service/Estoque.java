@@ -48,13 +48,9 @@ public class Estoque {
 					
 					System.out.println( + contador + " - "+ a.getNome());
 					contador++;
-
-					
 				}
-				
 			}
-			
-		
+				
 		int itemRemover =	atendente.escolherFrutaExcluir();
 		int itemAtualizado = itemRemover -1;
 		estoqueFrutas.remove(itemAtualizado);
@@ -62,7 +58,6 @@ public class Estoque {
 		System.out.println("|------------------------|");	
 		
 		atendente.atualizarEstoque();
-		
 
 		for (int cont = 0; cont < 1; cont++) {
 			int contador = 1;
@@ -70,15 +65,8 @@ public class Estoque {
 				
 				System.out.println( + contador + " - "+ a.getNome());
 				contador++;
-
-				
-			}
-			
+			}	
 		}
-		
-		
-
-
 			break;
 			
 		case 0:
