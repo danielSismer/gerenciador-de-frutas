@@ -21,9 +21,7 @@ public class Main {
 			int opcao = atendente.menuPrincipal();
 			
 			estoque.gerenciarEstoque(opcao, atendente, fruta, verdura, produto);
-			
-			
-			
+
 		}
 		
 		

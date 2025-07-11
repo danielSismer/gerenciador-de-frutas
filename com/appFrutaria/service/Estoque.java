@@ -67,6 +67,12 @@ public class Estoque {
 				int itemRemoverFruta = atendente.escolherFrutaExcluir();
 				if(itemRemoverFruta > 0 && itemRemoverFruta <= estoqueFrutas.size()) {
 					estoqueFrutas.remove(itemRemoverFruta - 1);
+					String comparar = estoqueFrutas.get(itemRemoverFruta - 1).getNome();
+					for (int i = 0; i < estoqueProdutos.size(); i++) {
+						if (comparar.equals(estoqueProdutos.get(i).getNome())) {
+							estoqueProdutos.remove(i);
+						}
+					}
 					System.out.println("|------------------------|");
 					atendente.atualizarEstoque();
 				} else {
@@ -105,6 +111,12 @@ public class Estoque {
 				int itemRemoverVerdura = atendente.escolherVerduraExcluir();
 				if(itemRemoverVerdura > 0 && itemRemoverVerdura <= estoqueVerduras.size()) {
 					estoqueVerduras.remove(itemRemoverVerdura - 1);
+					String comparar = estoqueFrutas.get(itemRemoverVerdura - 1).getNome();
+					for (int i = 0; i < estoqueProdutos.size(); i++) {
+						if (comparar.equals(estoqueProdutos.get(i).getNome())) {
+							estoqueProdutos.remove(i);
+						}
+					}
 					System.out.println("|------------------------|");
 					atendente.atualizarEstoque();
 				} else {
@@ -141,6 +153,17 @@ public class Estoque {
 				int itemRemoverProduto = atendente.escolherProdutoExcluir();
 				if(itemRemoverProduto > 0 && itemRemoverProduto <= estoqueProdutos.size()) {
 					estoqueProdutos.remove(itemRemoverProduto - 1);
+					String comparar = estoqueFrutas.get(itemRemoverProduto- 1).getNome();
+					for (int i = 0; i < estoqueFrutas.size(); i++) {
+						if (comparar.equals(estoqueFrutas.get(i).getNome())) {
+							estoqueFrutas.remove(i);
+						}
+					}
+					for (int i = 0; i < estoqueVerduras.size(); i++) {
+						if (comparar.equals(estoqueVerduras.get(i).getNome())) {
+							estoqueVerduras.remove(i);
+						}
+					}
 					System.out.println("|------------------------|");
 					atendente.atualizarEstoque();
 				} else {
@@ -163,14 +186,14 @@ public class Estoque {
 
 					for (int i = 0; i < estoqueProdutos.size(); i++) {
 						if (estoqueProdutos.get(i).getNome().equals(nomeProduto)) {
-							estoqueProdutos.get(i);
+							System.out.println(estoqueProdutos.get(i));
 						}
 					}
 				} else if (escolhaPesquisar == 2 ){
 					String nomeFruta = atendente.pesquisarFruta();
 					for (int i = 0; i < estoqueFrutas.size(); i++) {
 						if (estoqueFrutas.get(i).getNome().equals(nomeFruta)) {
-							estoqueFrutas.get(i);
+							System.out.println(estoqueFrutas.get(i));
 						}
 					}
 
@@ -178,17 +201,19 @@ public class Estoque {
 					String nomeVerdura = atendente.pesquisarVerdura();
 					for(int i = 0; i < estoqueVerduras.size(); i++) {
 						if (estoqueVerduras.get(i).getNome().equals(nomeVerdura)) {
-							estoqueVerduras.get(i);
+						System.out.println(estoqueVerduras.get(i));
 						}
 					}
 				}
 
-			case 0:
-				System.out.println("Saindo do sistema de estoque.");
 				break;
+
+			case 0:
+				System.exit(0);
 
 			default:
 				System.out.println("Opção inválida.");
 		}
+
 	}
 }
