@@ -1,45 +1,33 @@
 package com.appFrutaria.model;
 
-public class Fruta {
+public class Fruta extends Produto{
 
-	private String nome;
-	private double preco;
-	private int quantidade;
+	private double peso;
 
-	public Fruta() { 
-		
-		this.nome = "";
-		this.preco = 0;
-		this.quantidade = 0;
-
+	public Fruta(String nome, double preco, int quantidade, double peso) {
+		super(nome, preco, quantidade);
+		this.peso = peso;
 	}
 
-	public Fruta(String nome, double preco, int quantidade) {
-
-		this.nome = nome;
-		this.preco = preco;
-		this.quantidade = quantidade;
-
+	public Fruta() {
+		super();
+		this.peso = 0;
 	}
 
-	public String getNome() { return nome; }
-
-	public void setNome(String nome) { this.nome = nome; }
-
-	public double getPreco() { return preco; }
-
-	public void setPreco(double preco) { this.preco = preco; }
-
-	public int getQuantidade() { return quantidade; }
-
-	public void setQuantidade(int quantidade) { this.quantidade = quantidade; }
-	
+	@Override
 	public String toString() {
-		
-		
-		return "Nome da Fruta:" + this.nome +
-				"\nPreço da Fruta: " + this.preco +
-				"\nQuantidade da Fruta: " + this.quantidade;
+		return  "\n----------------------------------------" +
+				"\n🍎 Nome da Fruta     : " + this.nome +
+				"\n💲 Preço             : R$ " + String.format("%.2f", this.preco) +
+				"\n📦 Quantidade        : " + this.quantidade + " unidade(s)" +
+				"\n----------------------------------------";
+	}
+
+	public double getPeso() {
+		return peso;
+	}
+	public void setPeso(double peso) {
+		this.peso = peso;
 	}
 
 }
