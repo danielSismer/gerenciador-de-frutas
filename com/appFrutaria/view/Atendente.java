@@ -23,7 +23,7 @@ public class Atendente {
 		System.out.println("||   2 - 🍉 Listar Produtos                                         ||");
 		System.out.println("||   3 - ❌ Remover Produtos                                        ||");
 		System.out.println("||   4 - 🔍 Pesquisar Produtos                                      ||");
-		System.out.println("||   0 - 🚪 Sair                                                   ||");
+		System.out.println("||   0 - 🚪 Sair                                                    ||");
 		System.out.println("=====================================================================");
 		System.out.print("➡️  Sua escolha: ");
 		int escolha = input.nextInt();
@@ -138,7 +138,7 @@ public class Atendente {
 	}
 
 	public void msgCadastrado() {
-		System.out.println("==== ITENS CADASTRADOS ====\n");
+		System.out.print("\n====== ITENS CADASTRADOS ======");
 	}
 
 	public void listarProduto(Produto p, int cont) {
@@ -155,5 +155,17 @@ public class Atendente {
 		System.out.println("=============================");
 		System.out.println("       Estoque Vazio!!!       ");
 		System.out.println("=============================");
+	}
+
+	public void produtoNaoEncontrado(){
+		System.out.println("================================================");
+		System.out.println("||       ❌ Produto não encontrado            ||");
+		System.out.println("================================================");
+	}
+
+	public void opcaoInvalida(){
+		System.out.println("====================================== =========");
+		System.out.println("||     ❌ Opção Invalida, Tente novamente      ||");
+		System.out.println("================================================");
 	}
 }

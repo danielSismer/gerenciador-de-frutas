@@ -37,11 +37,11 @@ public class Estoque {
 				atendente.msgCadastrado();
 				System.out.println();
 
-				if  (opcao == 1) { for (Produto p : estoqueProdutos) { atendente.listarProduto(p, cont); } }
+				if  (opcao == 1) { for (Produto p : estoqueProdutos) { atendente.listarProduto(p, cont); cont++; } }
 
-				else if (opcao == 2) { for (Produto p : estoqueProdutos) { if (p instanceof Fruta f ) { atendente.listarProduto(f, cont); } } }
+				else if (opcao == 2) { for (Produto p : estoqueProdutos) { if (p instanceof Fruta f ) {  atendente.listarProduto(f, cont); cont++; } } }
 
-				else if  (opcao == 3) {	for (Produto p : estoqueProdutos) { if (p instanceof Verdura v) { atendente.listarProduto(v, cont); } } }
+				else if  (opcao == 3) {	for (Produto p : estoqueProdutos) { if (p instanceof Verdura v) {  atendente.listarProduto(v, cont); cont++; } } }
 
 			}
 
@@ -51,11 +51,16 @@ public class Estoque {
 				atendente.menuExcluir();
 				opcao = atendente.escolhaCategoriaExcluir();
 
+				if (opcao != 1 && opcao != 2){
+					atendente.opcaoInvalida();
+					return;
+				}
 				if (opcao == 1) {
 					boolean semFruta = estoqueProdutos.stream().noneMatch(product -> product instanceof Fruta);
 
 					if (semFruta) {
 						atendente.estoqueVazio();
+						break;
 					} else {
 						for (Produto p : estoqueProdutos) {
 							if (p instanceof Fruta f) {
@@ -81,6 +86,7 @@ public class Estoque {
 
 					if (semVerdura) {
 						atendente.estoqueVazio();
+						break;
 					} else {
 						for (Produto p : estoqueProdutos) {
 							if (p instanceof Verdura v) {
@@ -107,8 +113,11 @@ public class Estoque {
 				String itemPesquisar = atendente.pesquisarProduto();
 
 				for (Produto p : estoqueProdutos) {
-					if (p.getNome().equals(itemPesquisar)) {
+					if (p.getNome().equalsIgnoreCase(itemPesquisar)) {
 						atendente.listarProduto(p);
+					} else {
+						atendente.produtoNaoEncontrado();
+						break;
 					}
 				}
 			}
