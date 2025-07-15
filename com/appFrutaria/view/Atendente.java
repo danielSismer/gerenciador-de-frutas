@@ -13,180 +13,147 @@ public class Atendente {
 		input = new Scanner(System.in);
 	}
 
-	public Scanner getInput() {
-		return input;
-	}
-
-	public void setInput(Scanner input) {
-		this.input = input;
-	}
-
 	public int menuPrincipal() {
 		System.out.println();
 		System.out.println("=====================================================================");
-		System.out.println("||                      🌿 Bem-vindo à Frutaria 2.0! 🍎              ||");
+		System.out.println("||                    🌿 Bem-vindo à Frutaria 2.0! 🍎               ||");
 		System.out.println("=====================================================================");
-		System.out.println("||                                                                 ||");
-		System.out.println("||   1 - 📝 Cadastrar Produtos                                     ||");
-		System.out.println("||   2 - 🍉 Listar Frutas                                          ||");
-		System.out.println("||   3 - ❌ Remover Frutas                                         ||");
-		System.out.println("||   4 - 🥦 Listar Verduras                                        ||");
-		System.out.println("||   5 - ❌ Remover Verduras                                       ||");
-		System.out.println("||   6 - 📦 Listar Produtos                                        ||");
-		System.out.println("||   7 - ❌ Remover Produtos                                       ||");
-		System.out.println("||   8 - 🔍 Pesquisar Produtos                                    ||");
-		System.out.println("||   0 - 🚪 Sair                                                  ||");
-		System.out.println("||                                                                 ||");
+		System.out.println("||                                                                  ||");
+		System.out.println("||   1 - 📝 Cadastrar Produtos                                      ||");
+		System.out.println("||   2 - 🍉 Listar Produtos                                         ||");
+		System.out.println("||   3 - ❌ Remover Produtos                                        ||");
+		System.out.println("||   4 - 🔍 Pesquisar Produtos                                      ||");
+		System.out.println("||   0 - 🚪 Sair                                                   ||");
 		System.out.println("=====================================================================");
 		System.out.print("➡️  Sua escolha: ");
-
 		int escolha = input.nextInt();
+		input.nextLine();
 		System.out.println();
 		return escolha;
 	}
 
-	public Fruta escolhaCadastrar(Fruta fruta) {
+	public Produto escolhaCadastrar(Produto produto) {
 		System.out.println();
 		System.out.println("========= 🍓 Cadastro de Fruta =========");
-
 		System.out.print("Nome da fruta: 🍓 ");
-		String nome = input.next();
+		String nome = input.nextLine();
 
 		System.out.print("Preço da fruta: 💲 ");
 		double preco = input.nextDouble();
+		input.nextLine();
 
 		System.out.print("Quantidade disponível: 📦 ");
 		int quantidade = input.nextInt();
+		input.nextLine();
 
 		System.out.print("Peso da fruta (kg): ⚖️ ");
 		double peso = input.nextDouble();
+		input.nextLine();
 
-		fruta = new Fruta(nome, preco, quantidade, peso);
+		produto = new Fruta(nome, preco, quantidade, peso);
 
 		System.out.println("✅ Fruta cadastrada com sucesso!");
 		System.out.println("=====================================");
 		System.out.println();
 
-		return fruta;
-	}
-
-	public void escolhaExcluir() {
-		System.out.println();
-		System.out.println("=====================================================================");
-		System.out.println("||                     ❌ Qual item deseja remover?                ||");
-		System.out.println("=====================================================================");
-	}
-
-	public int escolherFrutaExcluir() {
-		System.out.print("➡️  Digite o número da fruta para remover: ");
-		return input.nextInt();
-	}
-
-	public int escolherVerduraExcluir() {
-		System.out.print("➡️  Digite o número da verdura para remover: ");
-		return input.nextInt();
-	}
-
-	public int escolherProdutoExcluir() {
-		System.out.print("➡️  Digite o número do produto para remover: ");
-		return input.nextInt();
-	}
-
-	public void atualizarEstoque() {
-		System.out.println();
-		System.out.println("=====================================================================");
-		System.out.println("||                ✅ Estoque atualizado com sucesso!               ||");
-		System.out.println("=====================================================================");
-		System.out.println();
-	}
-
-	public String pesquisar() {
-		input.nextLine();
-		System.out.print("🔍 Insira o nome da fruta para pesquisa:\n➡️  ");
-		return input.nextLine();
-	}
-
-	public int escolhaItemCadastro() {
-		System.out.println("O que deseja cadastrar?");
-		System.out.println("1️⃣ - Produto");
-		System.out.println("2️⃣ - Fruta");
-		System.out.println("3️⃣ - Verdura");
-		System.out.print("➡️  Sua escolha: ");
-		return input.nextInt();
-	}
-
-	public Produto cadastrarProduto(Produto produto) {
-		System.out.println();
-		System.out.println("======= 📦 Cadastro de Produto =======");
-
-		System.out.print("Nome do produto: ");
-		String nome = input.next();
-
-		System.out.print("Preço: 💲 ");
-		double preco = input.nextDouble();
-
-		System.out.print("Quantidade: 📦 ");
-		int quantidade = input.nextInt();
-
-		produto = new Produto(nome, preco, quantidade);
-
-		System.out.println("✅ Produto cadastrado com sucesso!");
-		System.out.println();
-
 		return produto;
 	}
 
-	public Verdura cadastrarVerdura(Verdura verdura) {
+	public Produto cadastrarVerdura(Produto produto) {
 		System.out.println();
 		System.out.println("======= 🥦 Cadastro de Verdura =======");
-
 		System.out.print("Nome da verdura: ");
-		String nome = input.next();
+		String nome = input.nextLine();
 
 		System.out.print("Preço: 💲 ");
 		double preco = input.nextDouble();
+		input.nextLine();
 
 		System.out.print("Quantidade: 📦 ");
 		int quantidade = input.nextInt();
-
 		input.nextLine();
 
 		System.out.print("Tipo da verdura: 🌿 ");
 		String tipo = input.nextLine();
 
-		verdura = new Verdura(nome, preco, quantidade, tipo);
+		produto = new Verdura(nome, preco, quantidade, tipo);
 
 		System.out.println("✅ Verdura cadastrada com sucesso!");
 		System.out.println();
 
-		return verdura;
+		return produto;
 	}
 
-	public int escolhaPesquisar() {
-		System.out.println("🔎 Em qual categoria deseja pesquisar?");
+	public void menuExcluir() {
+		System.out.println();
+		System.out.println("=====================================================================");
+		System.out.println("||        ❌ Qual a Categoria do item que deseja remover?           ||");
+		System.out.println("=====================================================================");
+	}
+
+	public int escolhaItemCadastro() {
+		System.out.println("O que deseja cadastrar?");
+		System.out.println("1️⃣ - Fruta");
+		System.out.println("2️⃣ - Verdura");
+		System.out.print("➡️  Sua escolha: ");
+		int escolha = input.nextInt();
+		input.nextLine();
+		return escolha;
+	}
+
+	public int escolhaListar() {
+		System.out.println("➤ Em qual categoria deseja listar?");
 		System.out.println("1️⃣ - Produto");
 		System.out.println("2️⃣ - Fruta");
 		System.out.println("3️⃣ - Verdura");
 		System.out.print("➡️  Sua escolha: ");
+		int escolha = input.nextInt();
+		input.nextLine();
+		return escolha;
+	}
 
-		return input.nextInt();
+	public int escolhaCategoriaExcluir() {
+		System.out.println("➤ Em qual categoria deseja remover?");
+		System.out.println("1️⃣ - Fruta");
+		System.out.println("2️⃣ - Verdura");
+		System.out.print("➡️  Sua escolha: ");
+		int escolha = input.nextInt();
+		input.nextLine();
+		return escolha;
 	}
 
 	public String pesquisarProduto() {
-		input.nextLine();
 		System.out.print("🔍 Insira o nome do produto:\n➡️  ");
 		return input.nextLine();
 	}
 
-	public String pesquisarFruta() {
-		input.nextLine();
-		System.out.print("🔍 Insira o nome da fruta:\n➡️  ");
+	public String escolhaExcluirFruta() {
+		System.out.print("➡️  Insira o Nome da Fruta: ");
 		return input.nextLine();
 	}
 
-	public String pesquisarVerdura() {
-		input.nextLine();
-		System.out.print("🔍 Insira o nome da verdura:\n➡️  ");
+	public String escolhaExcluirVerdura() {
+		System.out.print("➡️  Insira o Nome da Verdura: ");
 		return input.nextLine();
+	}
+
+	public void msgCadastrado() {
+		System.out.println("==== ITENS CADASTRADOS ====\n");
+	}
+
+	public void listarProduto(Produto p, int cont) {
+		System.out.println(cont + ": " + p.getNome());
+		System.out.println("=================================");
+	}
+
+	public void listarProduto(Produto p) {
+		System.out.println(p);
+		System.out.println("=================================");
+	}
+
+	public void estoqueVazio() {
+		System.out.println("=============================");
+		System.out.println("       Estoque Vazio!!!       ");
+		System.out.println("=============================");
 	}
 }

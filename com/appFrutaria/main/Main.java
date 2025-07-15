@@ -1,4 +1,4 @@
-package com.appFrutaria;
+package com.appFrutaria.main;
 
 import com.appFrutaria.model.Produto;
 import com.appFrutaria.model.Verdura;
