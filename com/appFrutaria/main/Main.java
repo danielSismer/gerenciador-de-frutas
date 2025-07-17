@@ -23,12 +23,6 @@ public class Main {
 			estoque.gerenciarEstoque(opcao, atendente, fruta, verdura, produto);
 
 		}
-		
-		
-		
-		
-		
-		
 
 	}
 
