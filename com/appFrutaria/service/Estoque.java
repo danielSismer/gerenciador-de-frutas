@@ -22,105 +22,171 @@ public class Estoque {
 
 			case 1 -> {
 
-				int escolhaCadastrar = atendente.escolhaItemCadastro();
+				while (true){
 
-				if (escolhaCadastrar == 1) { produto = atendente.escolhaCadastrar(produto); estoqueProdutos.add(produto);}
+					int escolhaCadastrar = atendente.escolhaItemCadastro();
 
-				else if (escolhaCadastrar == 2) { produto = atendente.cadastrarVerdura(produto); estoqueProdutos.add(produto); }
+					if (escolhaCadastrar == 1) { produto = atendente.escolhaCadastrar(produto); estoqueProdutos.add(produto); break;}
+
+					else if (escolhaCadastrar == 2) { produto = atendente.cadastrarVerdura(produto); estoqueProdutos.add(produto); break;}
+
+					else { atendente.opcaoInvalida(); }
+				}
 
 			}
 
 			case 2 -> {
 
-				int cont = 1;
-				opcao = atendente.escolhaListar();
-				atendente.msgCadastrado();
-				System.out.println();
+				while (true){
 
-				if  (opcao == 1) { for (Produto p : estoqueProdutos) { atendente.listarProduto(p, cont); cont++; } }
+					int cont = 1;
+					opcao = atendente.escolhaListar();
+					System.out.println();
 
-				else if (opcao == 2) { for (Produto p : estoqueProdutos) { if (p instanceof Fruta f ) {  atendente.listarProduto(f, cont); cont++; } } }
+					if (estoqueProdutos.isEmpty()){ atendente.estoqueVazio(); break; }
 
-				else if  (opcao == 3) {	for (Produto p : estoqueProdutos) { if (p instanceof Verdura v) {  atendente.listarProduto(v, cont); cont++; } } }
+					else if  (opcao == 1) { atendente.msgCadastrado(); for (Produto p : estoqueProdutos) { atendente.listarProduto(p, cont); cont++; } break; }
+
+					else if (opcao == 2) {
+						boolean semFruta = estoqueProdutos.stream().noneMatch(product -> product instanceof Fruta);
+
+						if (semFruta) {
+							atendente.estoqueVazio();
+							break;
+						}
+
+						atendente.msgCadastrado();
+						cont = 1;
+
+						for (Produto p : estoqueProdutos) {
+							if (p instanceof Fruta f) {
+								atendente.listarProduto(f, cont);
+								cont++;
+							}
+						}
+						break;
+					}
+
+					else if (opcao == 3) {
+						boolean semVerdura = estoqueProdutos.stream().noneMatch(product -> product instanceof Verdura);
+
+						if (semVerdura) {
+							atendente.estoqueVazio();
+							break;
+						}
+
+						atendente.msgCadastrado();
+						cont = 1;
+
+						for (Produto p : estoqueProdutos) {
+							if (p instanceof Verdura v) {
+								atendente.listarProduto(v, cont);
+								cont++;
+							}
+						}
+						break;
+					}
+
+					else { atendente.opcaoInvalida(); }
+
+				}
 
 			}
 
 			case 3 -> {
 
-				int cont = 1;
-				atendente.menuExcluir();
-				opcao = atendente.escolhaCategoriaExcluir();
+				while (true){
 
-				if (opcao != 1 && opcao != 2){
-					atendente.opcaoInvalida();
-					return;
-				}
-				if (opcao == 1) {
-					boolean semFruta = estoqueProdutos.stream().noneMatch(product -> product instanceof Fruta);
+					int cont = 1;
+					atendente.menuExcluir();
+					opcao = atendente.escolhaCategoriaExcluir();
 
-					if (semFruta) {
-						atendente.estoqueVazio();
-						break;
-					} else {
-						for (Produto p : estoqueProdutos) {
-							if (p instanceof Fruta f) {
-								System.out.println();
-								atendente.listarProduto(f, cont);
-								cont++;
+					if (opcao == 1) {
+						boolean semFruta = estoqueProdutos.stream().noneMatch(product -> product instanceof Fruta);
+
+						if (semFruta) {
+							atendente.estoqueVazio();
+							break;
+						} else {
+							for (Produto p : estoqueProdutos) {
+								if (p instanceof Fruta f) {
+									System.out.println();
+									atendente.listarProduto(f, cont);
+									cont++;
+								}
 							}
 						}
-					}
 
-					String nomeFruta = atendente.escolhaExcluirFruta();
+						String nomeFruta = atendente.escolhaExcluirFruta();
 
-					for (int i = estoqueProdutos.size() - 1; i >= 0; i--) {
-						Produto p = estoqueProdutos.get(i);
-						if (nomeFruta.equals(p.getNome())) {
-							estoqueProdutos.remove(i);
-						}
-					}
-				}
-
-				else if (opcao == 2) {
-					boolean semVerdura = estoqueProdutos.stream().noneMatch(product -> product instanceof Verdura);
-
-					if (semVerdura) {
-						atendente.estoqueVazio();
-						break;
-					} else {
-						for (Produto p : estoqueProdutos) {
-							if (p instanceof Verdura v) {
-								System.out.println();
-								atendente.listarProduto(v, cont++);
+						for (cont = estoqueProdutos.size() - 1; cont >= 0; cont--) {
+							Produto p = estoqueProdutos.get(cont);
+							if (nomeFruta.equals(p.getNome())) {
+								estoqueProdutos.remove(cont);
+								break;
+							} else {
+								atendente.produtoNaoEncontrado();
 							}
 						}
+
+						break;
 					}
 
-					String nomeVerdura = atendente.escolhaExcluirVerdura();
+					else if (opcao == 2) {
+						boolean semVerdura = estoqueProdutos.stream().noneMatch(product -> product instanceof Verdura);
 
-					for (int i = estoqueProdutos.size() - 1; i >= 0; i--) {
-						Produto p = estoqueProdutos.get(i);
-						if (nomeVerdura.equals(p.getNome())) {
-							estoqueProdutos.remove(i);
+						if (semVerdura) {
+							atendente.estoqueVazio();
+							break;
+						} else {
+							for (Produto p : estoqueProdutos) {
+								if (p instanceof Verdura v) {
+									System.out.println();
+									atendente.listarProduto(v, cont++);
+								}
+							}
 						}
+
+						String nomeVerdura = atendente.escolhaExcluirVerdura();
+
+						for ( cont = estoqueProdutos.size() - 1; cont >= 0; cont--) {
+							Produto p = estoqueProdutos.get(cont);
+							if (nomeVerdura.equals(p.getNome())) {
+								estoqueProdutos.remove(cont);
+							} else {
+								atendente.produtoNaoEncontrado();
+							}
+						}
+
+						break;
 					}
+
+					else {
+						atendente.opcaoInvalida();
+					}
+
 				}
+
 
 			}
 
 			case 4 -> {
-
 				String itemPesquisar = atendente.pesquisarProduto();
+				boolean encontrado = false;
 
 				for (Produto p : estoqueProdutos) {
-					if (p.getNome().equalsIgnoreCase(itemPesquisar)) {
+					if (itemPesquisar.equalsIgnoreCase(p.getNome())) {
 						atendente.listarProduto(p);
-					} else {
-						atendente.produtoNaoEncontrado();
+						encontrado = true;
 						break;
 					}
 				}
+
+				if (!encontrado) {
+					atendente.produtoNaoEncontrado();
+				}
 			}
+
 
 			case 0 -> {
 				System.exit(0);

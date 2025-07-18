@@ -23,11 +23,14 @@ public class Verdura extends Produto{
 
     @Override
     public String toString() {
-        return "🥦 Verdura: " + getNome() +
-                " | 💲 Preço: R$ " + String.format("%.2f", getPreco()) +
-                " | 📦 Quantidade: " + getQuantidade() +
-                " | 🥬 Tipo: " + tipo;
+        return  "\n----------------------------------------" +
+                "\n🥦 Nome da Verdura   : " + getNome() +
+                "\n💲 Preço             : R$ " + String.format("%.2f", getPreco()) +
+                "\n📦 Quantidade        : " + getQuantidade() + " unidade(s)" +
+                "\n🥬 Tipo             : " + tipo +
+                "\n----------------------------------------";
     }
+
 
 
 }

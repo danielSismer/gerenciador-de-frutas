@@ -1,5 +1,6 @@
 package com.appFrutaria.view;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import com.appFrutaria.model.Fruta;
 import com.appFrutaria.model.Produto;
@@ -14,22 +15,31 @@ public class Atendente {
 	}
 
 	public int menuPrincipal() {
-		System.out.println();
-		System.out.println("=====================================================================");
-		System.out.println("||                    🌿 Bem-vindo à Frutaria 2.0! 🍎               ||");
-		System.out.println("=====================================================================");
-		System.out.println("||                                                                  ||");
-		System.out.println("||   1 - 📝 Cadastrar Produtos                                      ||");
-		System.out.println("||   2 - 🍉 Listar Produtos                                         ||");
-		System.out.println("||   3 - ❌ Remover Produtos                                        ||");
-		System.out.println("||   4 - 🔍 Pesquisar Produtos                                      ||");
-		System.out.println("||   0 - 🚪 Sair                                                    ||");
-		System.out.println("=====================================================================");
-		System.out.print("➡️  Sua escolha: ");
-		int escolha = input.nextInt();
-		input.nextLine();
-		System.out.println();
-		return escolha;
+		while (true) {
+			try {
+				System.out.println();
+				System.out.println("=====================================================================");
+				System.out.println("||                    🌿 Bem-vindo à Frutaria 2.0! 🍎               ||");
+				System.out.println("=====================================================================");
+				System.out.println("||                                                                  ||");
+				System.out.println("||   1 - 📝 Cadastrar Produtos                                      ||");
+				System.out.println("||   2 - 🍉 Listar Produtos                                         ||");
+				System.out.println("||   3 - ❌ Remover Produtos                                        ||");
+				System.out.println("||   4 - 🔍 Pesquisar Produtos                                      ||");
+				System.out.println("||   0 - 🚪 Sair                                                    ||");
+				System.out.println("=====================================================================");
+				System.out.print("➡️  Sua escolha: ");
+
+				int escolha = input.nextInt();
+				input.nextLine();
+				System.out.println();
+				return escolha;
+
+			} catch (InputMismatchException e) {
+				System.out.println("\n❗ Entrada inválida! Apenas números são permitidos.");
+				input.nextLine();
+			}
+		}
 	}
 
 	public Produto escolhaCadastrar(Produto produto) {
@@ -38,23 +48,14 @@ public class Atendente {
 		System.out.print("Nome da fruta: 🍓 ");
 		String nome = input.nextLine();
 
-		System.out.print("Preço da fruta: 💲 ");
-		double preco = input.nextDouble();
-		input.nextLine();
-
-		System.out.print("Quantidade disponível: 📦 ");
-		int quantidade = input.nextInt();
-		input.nextLine();
-
-		System.out.print("Peso da fruta (kg): ⚖️ ");
-		double peso = input.nextDouble();
-		input.nextLine();
+		double preco = lerDouble("Preço da fruta: 💲 ");
+		int quantidade = lerInt("Quantidade disponível: 📦 ");
+		double peso = lerDouble("Peso da fruta (kg): ⚖️ ");
 
 		produto = new Fruta(nome, preco, quantidade, peso);
 
 		System.out.println("✅ Fruta cadastrada com sucesso!");
-		System.out.println("=====================================");
-		System.out.println();
+		System.out.println("=====================================\n");
 
 		return produto;
 	}
@@ -65,21 +66,14 @@ public class Atendente {
 		System.out.print("Nome da verdura: ");
 		String nome = input.nextLine();
 
-		System.out.print("Preço: 💲 ");
-		double preco = input.nextDouble();
-		input.nextLine();
-
-		System.out.print("Quantidade: 📦 ");
-		int quantidade = input.nextInt();
-		input.nextLine();
-
+		double preco = lerDouble("Preço: 💲 ");
+		int quantidade = lerInt("Quantidade: 📦 ");
 		System.out.print("Tipo da verdura: 🌿 ");
 		String tipo = input.nextLine();
 
 		produto = new Verdura(nome, preco, quantidade, tipo);
 
-		System.out.println("✅ Verdura cadastrada com sucesso!");
-		System.out.println();
+		System.out.println("✅ Verdura cadastrada com sucesso!\n");
 
 		return produto;
 	}
@@ -92,34 +86,15 @@ public class Atendente {
 	}
 
 	public int escolhaItemCadastro() {
-		System.out.println("O que deseja cadastrar?");
-		System.out.println("1️⃣ - Fruta");
-		System.out.println("2️⃣ - Verdura");
-		System.out.print("➡️  Sua escolha: ");
-		int escolha = input.nextInt();
-		input.nextLine();
-		return escolha;
+		return lerIntMenu("O que deseja cadastrar?\n1️⃣ - Fruta\n2️⃣ - Verdura\n➡️  Sua escolha: ");
 	}
 
 	public int escolhaListar() {
-		System.out.println("➤ Em qual categoria deseja listar?");
-		System.out.println("1️⃣ - Produto");
-		System.out.println("2️⃣ - Fruta");
-		System.out.println("3️⃣ - Verdura");
-		System.out.print("➡️  Sua escolha: ");
-		int escolha = input.nextInt();
-		input.nextLine();
-		return escolha;
+		return lerIntMenu("➤ Em qual categoria deseja listar?\n1️⃣ - Produto\n2️⃣ - Fruta\n3️⃣ - Verdura\n➡️  Sua escolha: ");
 	}
 
 	public int escolhaCategoriaExcluir() {
-		System.out.println("➤ Em qual categoria deseja remover?");
-		System.out.println("1️⃣ - Fruta");
-		System.out.println("2️⃣ - Verdura");
-		System.out.print("➡️  Sua escolha: ");
-		int escolha = input.nextInt();
-		input.nextLine();
-		return escolha;
+		return lerIntMenu("➤ Em qual categoria deseja remover?\n1️⃣ - Fruta\n2️⃣ - Verdura\n➡️  Sua escolha: ");
 	}
 
 	public String pesquisarProduto() {
@@ -138,7 +113,7 @@ public class Atendente {
 	}
 
 	public void msgCadastrado() {
-		System.out.print("\n====== ITENS CADASTRADOS ======");
+		System.out.print("\n====== ITENS CADASTRADOS ======\n");
 	}
 
 	public void listarProduto(Produto p, int cont) {
@@ -157,15 +132,58 @@ public class Atendente {
 		System.out.println("=============================");
 	}
 
-	public void produtoNaoEncontrado(){
+	public void produtoNaoEncontrado() {
 		System.out.println("================================================");
 		System.out.println("||       ❌ Produto não encontrado            ||");
 		System.out.println("================================================");
 	}
 
-	public void opcaoInvalida(){
-		System.out.println("====================================== =========");
-		System.out.println("||     ❌ Opção Invalida, Tente novamente      ||");
-		System.out.println("================================================");
+	public void opcaoInvalida() {
+		System.out.println("===============================================");
+		System.out.println("||     ❌ Opção Inválida, Tente novamente     ||");
+		System.out.println("===============================================");
 	}
+
+	private int lerInt(String mensagem) {
+		while (true) {
+			try {
+				System.out.print(mensagem);
+				int valor = input.nextInt();
+				input.nextLine();
+				return valor;
+			} catch (InputMismatchException e) {
+				System.out.println("❗ Entrada inválida! Digite um número inteiro.");
+				input.nextLine();
+			}
+		}
+	}
+
+	private double lerDouble(String mensagem) {
+		while (true) {
+			try {
+				System.out.print(mensagem);
+				double valor = input.nextDouble();
+				input.nextLine();
+				return valor;
+			} catch (InputMismatchException e) {
+				System.out.println("❗ Entrada inválida! Digite um número com ponto (ex: 4.99).");
+				input.nextLine();
+			}
+		}
+	}
+
+	private int lerIntMenu(String mensagem) {
+		while (true) {
+			try {
+				System.out.print(mensagem);
+				int valor = input.nextInt();
+				input.nextLine();
+				return valor;
+			} catch (InputMismatchException e) {
+				System.out.println("❗ Opção inválida! Digite um número correspondente ao menu.");
+				input.nextLine();
+			}
+		}
+	}
+
 }
