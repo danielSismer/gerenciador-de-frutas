@@ -10,9 +10,18 @@ public class DatabaseConnection {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            String url = "jdbc:mysql://root:fyAjvGXqYTnUvmTeOtYkvNiAhHKRauHB@tramway.proxy.rlwy.net:11981/railway?useSSL=false&serverTimezone=UTC";
+            // Configurações do banco de dados
+            String host = "tramway.proxy.rlwy.net";
+            String port = "11981";
+            String database = "railway";
+            String username = "root";
+            String password = "fyAjvGXqYTnUvmTeOtYkvNiAhHKRauHB";
 
-            Connection connection = DriverManager.getConnection(url);
+            // URL de conexão sem credenciais
+            String url = "jdbc:mysql://" + host + ":" + port + "/" + database + "?useSSL=false&serverTimezone=UTC";
+
+            // Conexão com credenciais separadas
+            Connection connection = DriverManager.getConnection(url, username, password);
             System.out.println("✅ Conexão estabelecida com sucesso!");
 
             return connection;

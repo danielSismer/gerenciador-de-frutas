@@ -5,3 +5,5 @@
 !com/
 !com/appFrutaria/
 !com/appFrutaria/**
+
+*.iml
